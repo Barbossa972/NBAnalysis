@@ -2,10 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def scrape():
-    
+def scrape(year: int):
+
     url = 'https://www.basketball-reference.com/'
-    response = requests.get(url)
+    season = f"leagues/NBA_games{year}.html"
+    link_to_games = url + season
+    response = requests.get(link_to_games)
     soup = BeautifulSoup(response.text, 'html.parser')
     # print(soup)
     # title = soup.select_one('h1').text
@@ -14,12 +16,13 @@ def scrape():
     titles = soup.find_all("h1")
     texts = soup.find_all("p")
     links = soup.find_all("a")
-    print(titles)
+    # print(titles)
     # print(texts)
-    # print(links)
+    print(links)
+
 
 
 
 if __name__ == '__main__':
-    scrape()
+    scrape(2025)
     
